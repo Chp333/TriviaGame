@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Trivia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/style.css"> -->
+
+
+    <style type="text/css">
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+        /* .container {
+      width: 100%;
+      max-width: 960px;
+      margin-top: 50px;
+      margin-left: 50px;
+      clear: both;
+      /* background-color: #aaa04a; */
+        /* color: white;
+      margin-bottom: 50px;
+    }  */
+
+
+        body {
+            background-image: url("./assets/back8.png");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: stretch;
+        }
+
+        .active {
+            background-color: blue;
+            display: none;
+        }
+
+        #counterCountDown {
+            background-color: red;
+        }
+
+        .trivia {
+            background-color: pink;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+
+
+        .invisible {
+            display: none;
+        }
+
+        .quest1,
+        .quest2,
+        .quest3 {
+            padding-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+
+        <div id="main-container" class="container">
+            <section class="main-section">
+                <!--<form>-->
+                <!--Add this as a row that takes up 12 columns-->
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h1>Trivia Trivia Trivia</h1>
+                    </div>
+                </div>
+                <section id="start">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h3>Lets get your genius on, press the button to start</h3>
+                            <button class="start">Start</button>
+                        </div>
+                    </div>
+
+
+
+                    <div class="container invisible">
+                        <div id="counterCountDown" class="container">
+                            <section class="countDown-section trivia">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-4">
+                                        <p id="show-number"> </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-4">
+                                        <div class="finished active">
+                                            <p id="correct">Correct Answers: </p>
+                                            <p id="incorrect">Incorrect Answers: </p>
+                                            <P id="unansw">Unanswered:</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6 col-sm-8 trivia">
+                                        <p>
+                                            <h2>Trivia Questions</h2>
+                                        </p>
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <p>1. What is the capital of Florida?</p>
+                                                <div class="quest1">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="capital" value="hialeah"> Hialeah</label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="capital" value="tal"> Tallahasse</label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="capital" value="orlando"> Orlando</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <p>2. What is 2 + 2?</p>
+                                                <div class="quest2">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="math" value="four"> 4</label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="math" value="six"> 6</label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="math" value="nine"> 9</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <p>3. How much wood, could a wood chuck chuck, if a wood chuck could
+                                                    chuck wood?</p>
+                                                <div class="quest3">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="wood" value="two"> 2 peices of wood</label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="wood" value="bridge"> enough wood to
+                                                        build a bridge</label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="wood" value="wheaties"> Depends on if
+                                                        the wood chuck ate his wheaties</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col-xs-12">
+                                                <button class="buttonDone center">Done</button>
+                                            </div>
+                                        </div> -->
+
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+
+        </div>
+        <button class="buttonDone center">Done</button>
+        <button class="again active">Try Again</button>
+    </div>
+
+
+    </section>
+
+
+    </div>
+    </div>
+    </section>
+    </section>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Script -->
+    <script type="text/javascript">
+
+        // create question tracking variables
+        var correct = 0;
+        var wrong = 0;
+        var skipped = 0;
+        var triviaQuest = $(".countDown-section").html();
+        var done = $(".finished").html();
+        //  Interval Demonstration
+        //  Set our number counter to 100.
+        var number = 0;
+
+        //  Variable that will hold our interval ID when we execute
+        //  the "run" function
+        var intervalId;
+
+function initiateRound() {
+  correct = 0;
+  wrong = 0;
+  skipped = 0;
+  number = 10;
+  targetNumber = Math.floor(Math.random() * (120 - 19 + 1)) + 19;
+  counter = 0;
+  
+}
+
+initiateRound();
+
+
+
+// code to try to put focus on the radio buttons to show the correct answers
+        $('.focus').on("input:radio:checked", function () {
+            console.log("works");
+            $(this).toggleClass("active");
+        });
+
+//button to start
+        $("button.start, .again").on("click", function() {
+            $("section#start").html(triviaQuest);
+            initiateRound();
+
+            //  The run function sets an interval
+            //  that runs the decrement function once a second.
+            //  *****BUG FIX******** 
+            //  Clearing the intervalId prior to setting our new intervalId will not allow multiple instances.
+                function run() {
+                clearInterval(intervalId);
+                intervalId = setInterval(decrement, 1000);
+                }
+
+                //  The decrement function.
+                function decrement() {
+
+                //  Decrease number by one.
+                number--;
+
+                //  Show the number in the #show-number tag.
+                $("#show-number").html("<h2>" + "Time left: " + number + "</h2>");
+
+
+                //  Once number hits zero...
+                if (number === 0) {
+
+                    //  ...run the stop function.
+                    stop();
+
+                    //  Alert the user that time is up.
+                    alert("Time Up!");
+                }
+                }
+
+                //  The stop function
+                function stop() {
+                    
+                //  Clears our intervalId
+                //  We just pass the name of the interval
+                //  to the clearInterval function.
+                clearInterval(intervalId);
+                                
+
+
+            //this is the code to show the question scores when the timer ends
+                $(".finished, .again").toggleClass("active");
+            
+            if ($(".quest3 input:checked").val() === 'wheaties') {
+                correct++;
+                $("p#correct").text("Correct: " + correct);
+                // } else if ($(".quest3 input:unchecked").val(null)) {
+                //     skipped++;
+                //     $("p#unansw").text("Unanswered: " + skipped);
+            }
+            else {
+                $("p#incorrect").text("Incorrect: " + ++wrong);
+            }
+
+            if ($(".quest2 input:checked").val() === 'four') {
+                correct++;
+                $("p#correct").text("Correct: " + correct);
+            } else {
+                $("p#incorrect").text("Incorrect: " + ++wrong);
+            }
+
+            if ($(".quest1 input:checked").val() === 'tal') {
+                correct++;
+                $("p#correct").text("Correct: " + correct);
+            } else {
+                $("p#incorrect").text("Incorrect: " + ++wrong);
+            }
+                done;
+                initiateRound();
+               
+                }
+
+                run();
+            });
+
+
+  //button for when work is done          
+
+     
+
+      $("button.buttonDone").on("click", function () {
+            $(".finished, .active").toggleClass("active");
+            
+            if ($(".quest3 input:checked").val() === 'wheaties') {
+                correct++;
+                $("p#correct").text("Correct: " + correct);
+                // } else if ($(".quest3 input:unchecked").val(null)) {
+                //     skipped++;
+                //     $("p#unansw").text("Unanswered: " + skipped);
+            }
+            else {
+                $("p#incorrect").text("Incorrect: " + ++wrong);
+            }
+
+            if ($(".quest2 input:checked").val() === 'four') {
+                correct++;
+                $("p#correct").text("Correct: " + correct);
+            } else {
+                $("p#incorrect").text("Incorrect: " + ++wrong);
+            }
+
+            if ($(".quest1 input:checked").val() === 'tal') {
+                correct++;
+                $("p#correct").text("Correct: " + correct);
+            } else {
+                $("p#incorrect").text("Incorrect: " + ++wrong);
+            }
+            //  The stop function
+            stop();
+            function stop() {
+                    
+                    //  Clears our intervalId
+                    //  We just pass the name of the interval
+                    //  to the clearInterval function.
+                    clearInterval(intervalId);
+                    
+}
+        });
+
+// $("button.again").on("click", function() {
+// initiateRound();
+// $("section#start").html(triviaQuest);
+// });
+
+// $('input:radio:checked')` or `$("input:radio").is(':checked')` should work
+
+    </script>
+</body>
+
+</html>
