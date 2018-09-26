@@ -37,7 +37,8 @@
 
         .active {
             background-color: blue;
-            display: none;
+            /* display: none; */
+            visibility: hidden
         }
 
         #counterCountDown {
@@ -90,7 +91,7 @@
 
 
 
-                    <div class="container invisible">
+                    <div class="container active">
                         <div id="counterCountDown" class="container">
                             <section class="countDown-section trivia">
                                 <div class="row">
@@ -104,7 +105,10 @@
                                             <p id="correct">Correct Answers: </p>
                                             <p id="incorrect">Incorrect Answers: </p>
                                             <P id="unansw">Unanswered:</p>
+                                             
                                         </div>
+                                        <button id="finish" class="buttonDone center">Done</button>
+                                        <button id="try" class="again active">Try Again</button>
                                     </div>
 
                                     <div class="col-xs-6 col-sm-8 trivia">
@@ -157,20 +161,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="row">
-                                            <div class="col-xs-12">
-                                                <button class="buttonDone center">Done</button>
-                                            </div>
-                                        </div> -->
+                                        
 
                                     </div>
+                                    
                                 </div>
                         </div>
                     </div>
 
         </div>
-        <button class="buttonDone center">Done</button>
-        <button class="again active">Try Again</button>
+      
+        
     </div>
 
 
@@ -206,31 +207,15 @@ function initiateRound() {
   wrong = 0;
   skipped = 0;
   number = 10;
-  targetNumber = Math.floor(Math.random() * (120 - 19 + 1)) + 19;
   counter = 0;
   
 }
 
 initiateRound();
 
+ //  The run function sets an interval on the global level
 
-
-// code to try to put focus on the radio buttons to show the correct answers
-        $('.focus').on("input:radio:checked", function () {
-            console.log("works");
-            $(this).toggleClass("active");
-        });
-
-//button to start
-        $("button.start, .again").on("click", function() {
-            $("section#start").html(triviaQuest);
-            initiateRound();
-
-            //  The run function sets an interval
-            //  that runs the decrement function once a second.
-            //  *****BUG FIX******** 
-            //  Clearing the intervalId prior to setting our new intervalId will not allow multiple instances.
-                function run() {
+            function run() {
                 clearInterval(intervalId);
                 intervalId = setInterval(decrement, 1000);
                 }
@@ -263,11 +248,9 @@ initiateRound();
                 //  We just pass the name of the interval
                 //  to the clearInterval function.
                 clearInterval(intervalId);
-                                
-
 
             //this is the code to show the question scores when the timer ends
-                $(".finished, .again").toggleClass("active");
+                $("#finish, .finished, .again").toggleClass("active");
             
             if ($(".quest3 input:checked").val() === 'wheaties') {
                 correct++;
@@ -294,19 +277,41 @@ initiateRound();
                 $("p#incorrect").text("Incorrect: " + ++wrong);
             }
                 done;
-                initiateRound();
+                // initiateRound();
                
-                }
+                
 
-                run();
-            });
+                //  run();
+            };
+
+
+// code to try to put focus on the radio buttons to show the correct answers
+        $('.focus').on("input:radio:checked", function () {
+            console.log("works");
+            $(this).toggleClass("active");
+        });
+
+//button to start
+        $("button.start, .again").on("click", function() {
+            $("section#start").html(triviaQuest);
+            initiateRound();
+            run();
+        });
+
+
+           
 
 
   //button for when work is done          
 
      
 
-      $("button.buttonDone").on("click", function () {
+    //   $("button.buttonDone").on("click", function () {
+    //       console.log("working")
+
+$("body").on("click","#finish", function () {
+          console.log("working")
+
             $(".finished, .active").toggleClass("active");
             
             if ($(".quest3 input:checked").val() === 'wheaties') {
@@ -341,14 +346,18 @@ initiateRound();
                     //  We just pass the name of the interval
                     //  to the clearInterval function.
                     clearInterval(intervalId);
+                    initiateRound();
                     
 }
         });
 
-// $("button.again").on("click", function() {
-// initiateRound();
-// $("section#start").html(triviaQuest);
-// });
+$("body").on("click","#try", function () {
+          console.log("working")
+clearInterval(intervalId);
+initiateRound();
+run();
+$("section#start").html(triviaQuest);
+});
 
 // $('input:radio:checked')` or `$("input:radio").is(':checked')` should work
 
